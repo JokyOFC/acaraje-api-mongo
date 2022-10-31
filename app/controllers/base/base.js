@@ -6,9 +6,8 @@ module.exports = {
         const base = await Base.create({name})
         return res.send(base);
     },
-
     find : async(req, res) => {
-        const base = await Base.find()
+        const base = await Base.find().populate(['filicod','name']).exec();
         return res.send(base)
     },
     delete : async (req, res) => {
