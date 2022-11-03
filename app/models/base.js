@@ -4,8 +4,8 @@ const Schema = mongo.Schema;
 const baseSchema = new Schema({
     name: String,
     filiais: [{
-        type: Schema.Types.ObjectId,
-        ref: 'filiais'
+        filicod: Number,
+        name: String
     }]
 });
 

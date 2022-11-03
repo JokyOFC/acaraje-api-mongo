@@ -13,10 +13,11 @@ const orderSchema = new Schema({
     paymentMethod:{ 
         type: Schema.Types.ObjectId, ref:'payment',
     },
-    base:{ 
+    base:{
         type: Schema.Types.ObjectId, ref: 'bases',
     },
     total: Number,
+    finished: Boolean,
     createdAt: {
         type: Date,
         default: Date.now,

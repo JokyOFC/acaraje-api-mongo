@@ -7,12 +7,13 @@ const order = require('./controllers/order/order')
 const payment = require('./controllers/payment/payment')
 const product = require('./controllers/product/product')
 const base = require('./controllers/base/base');
-const filiais = require('./controllers/filiais');
 
 router.get('/',(req,res)=>res.send('ok'));
 
 // orders routes
 router.get('/orders', order.find)
+
+router.post('/orders/base', order.findByBase)
 
 router.post('/order/create', order.post)
 router.post('/order/cancel', order.cancel)
@@ -32,14 +33,10 @@ router.post('/payment/delete', payment.delete)
 // base routes
 router.get('/bases', base.find)
 
+router.post('/base/id', base.findById)
+
 router.post('/base/create', base.create)
 router.post('/base/delete', base.delete)
-
-// fili routes
-router.get('/fili', filiais.find)
-
-router.post('/fili/create', filiais.create)
-router.post('/fili/delete', filiais.delete)
 
 
 // router.post('/user/create',User.create);

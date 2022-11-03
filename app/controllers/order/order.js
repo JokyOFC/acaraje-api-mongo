@@ -1,3 +1,6 @@
+const { default: mongoose } = require('mongoose');
+const { db } = require('../../models/order');
+const order = require('../../models/order');
 const Order = require('../../models/order');
 const payment = require('../payment/payment');
 
@@ -9,7 +12,8 @@ module.exports = {
             products,
             paymentMethod,
             base,
-            total
+            total,
+            finished: false,
         })
         return res.send(order)
     },
@@ -36,7 +40,14 @@ module.exports = {
 
     findByBase: async(req, res) => {
         const { id } = req.body;
-        const order = await Order.find({})
+        const objId = mongoose.Types.ObjectId(id)
+        const order = await Order.find({ base : objId }).populate(['paymentMethod','base', { path: 'products', populate: { path: 'item', model: 'product' } }]).exec()
+        return res.send(order)
+    },
+
+    findByBaseNow: async(req, res) => {
+        const { id } = req.body;
+        const order = await Order.find({ 'base._id' : id }).populate(['paymentMethod','base', { path: 'products', populate: { path: 'item', model: 'product' } }]).exec()
     },
 
     findByBaseNow: async(req, res) => {
