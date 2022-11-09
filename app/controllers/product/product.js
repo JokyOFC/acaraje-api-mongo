@@ -3,11 +3,11 @@ const Base = require('../../models/base');
 
 module.exports = {
     create : async (req, res) => {
-        const { BaseId, FiliId, name, price } = req.body
+        const { BaseId, FiliId, productId, name, price } = req.body
         const base = await Base.findById(BaseId)
         const filial = base.filiais.find((filial) => filial.filicod == FiliId)
         
-        filial.products.push({name, price})
+        filial.products.push({productId, name, price})
 
         base.save()
 

@@ -1,19 +1,15 @@
 const Payment = require('../../models/payment');
 const Base = require('../../models/base')
 
-const express = require('express')
-
-express.Router
-
 module.exports = {
     create : async (req, res) => {
-        const { BaseId, FiliId, name } = req.body
+        const { BaseId, FiliId, paymentId, name } = req.body
         const base = await Base.findById(BaseId)
         const filial = await base.filiais.find((filial) => filial.filicod == FiliId)
         
         // const payments = filial.payments
 
-        filial.payments.push({ name: name })
+        filial.payments.push({ paymentId, name: name })
 
         base.save()
 

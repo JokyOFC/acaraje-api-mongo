@@ -4,11 +4,12 @@ const mongo = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
 
+const autoIncrement = require('mongoose-auto-increment');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-mongo.connect(
+var connection = mongo.connect(
     "mongodb+srv://JokyOFC:joaquim123@mybase.zbxmhtw.mongodb.net/?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,

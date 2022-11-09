@@ -1,5 +1,4 @@
 const mongo = require('mongoose');
-const base = require('./base');
 const Schema = mongo.Schema;
 
 const orderSchema = new Schema({
@@ -8,9 +7,8 @@ const orderSchema = new Schema({
         {
             amount: Number,
             item: {
-                productId: Number,
-                name: String,
-                price: Number,
+                type: Schema.Types.ObjectId,
+                ref: 'bases.filiais'
             }
         }
     ],
@@ -19,7 +17,10 @@ const orderSchema = new Schema({
         name: String
     },
     base:{
-        baseId: {type: Schema.Types.ObjectId, ref: 'bases'},
+        baseId: {
+            type: Schema.Types.ObjectId, 
+            ref: 'bases'
+        },
         fili: Number
     },
     total: Number,

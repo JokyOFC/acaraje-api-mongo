@@ -11,7 +11,7 @@ module.exports = {
         const base = await Base.findById(baseId);
         const filiais = base.filiais.push({ "filicod": filicod, "name": name })
         base.save()
-        return res.sendStatus(200)
+        return res.send(base)
     },
     find : async(req, res) => {
         const base = await Base.find()
