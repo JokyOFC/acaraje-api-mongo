@@ -4,23 +4,23 @@ const Schema = mongo.Schema;
 const baseSchema = new Schema(
     {
         name: String,
+        payments: [
+                {
+                    paymentId: Number,
+                    name: String
+                }
+            ],
+        products: [
+                {
+                    productId: Number,
+                    nam: String,
+                    price: Number,
+                }
+            ],
         filiais: [
             {
                 filicod: Number,
                 name: String,
-                payments: [
-                    new Schema({
-                        paymentId: Number,
-                        name: String
-                    })
-                ],
-                products: [
-                    new Schema({
-                        productId: Number,
-                        name: String,
-                        price: Number,
-                    })
-                ],
             }
         ]
     }
