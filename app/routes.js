@@ -34,8 +34,10 @@ router.post('/payment/delete', payment.delete)
 router.get('/bases', base.find)
 
 router.post('/base/id', base.findById)
+router.post('/base/fili/id', base.findFiliById)
 
 router.post('/base/create', base.create)
+router.post('/base/createfili', base.createFili)
 router.post('/base/delete', base.delete)
 
 

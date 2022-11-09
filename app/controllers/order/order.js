@@ -6,12 +6,15 @@ const payment = require('../payment/payment');
 
 module.exports = {
     post : async(req, res) => {
-        const { cliente, products, paymentMethod, base, total } = req.body
+        const { cliente, products, paymentMethod, baseId, filicod, total } = req.body
         const order = await Order.create({
             cliente,
             products,
             paymentMethod,
-            base,
+            base: {
+                baseId: baseId,
+                fili: filicod
+            },
             total,
             finished: false,
         })
@@ -19,9 +22,11 @@ module.exports = {
     },
 
     find : async(req, res) => {
-        const order = await Order.find().populate(['paymentMethod','base', { path: 'products', populate: { path: 'item', model: 'product' } }]).exec();
+        const order = await Order.find().populate([{path: 'base', populate: {path: 'baseId', model: 'bases'}}]).exec();
         return res.send(order)
     },
+
+    // TO DO
 
     orderByDate : async(req, res) => {
         const { date } = req.body
