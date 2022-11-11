@@ -3,7 +3,10 @@ const Schema = mongo.Schema;
 
 const productSchema = new Schema({
     name: String,
-    price: Number,
+    price: {
+        type: mongo.Types.ObjectId,
+        ref: 'prices'
+    },
     createdAt: {
         type: Date,
         default: Date.now,

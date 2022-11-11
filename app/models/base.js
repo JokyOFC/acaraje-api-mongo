@@ -6,15 +6,16 @@ const baseSchema = new Schema(
         name: String,
         payments: [
                 {
-                    paymentId: Number,
-                    name: String
+                    name: String,
                 }
             ],
         products: [
                 {
-                    productId: Number,
-                    nam: String,
-                    price: Number,
+                    name: String,
+                    price: {
+                        type: mongo.Types.ObjectId,
+                        ref: 'prices'
+                    }
                 }
             ],
         filiais: [
@@ -25,7 +26,5 @@ const baseSchema = new Schema(
         ]
     }
 );
-
-mongo.model('filiais', baseSchema.filiais)
 
 module.exports = mongo.model("bases", baseSchema);

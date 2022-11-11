@@ -1538,6 +1538,11 @@ mongoose-auto-increment@^5.0.1:
   dependencies:
     extend "^3.0.0"
 
+mongoose-sub-references-populate@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/mongoose-sub-references-populate/-/mongoose-sub-references-populate-1.0.2.tgz#c3590cacd1ab6385b1bd73c3e8c667de659651fe"
+  integrity sha512-Eh5ll23/csWiPvniMN2mu1ZQaEpDrCFNwIaEj1ecmebIwzGJ/e/PsC6nalvmejktlZUjRsZBdOPw9/J6FDjBBg==
+
 mongoose@^6.6.5:
   version "6.7.2"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-6.7.2.tgz#457994b254a2afd1e03dd8f0b3046ff3d2ed276e"

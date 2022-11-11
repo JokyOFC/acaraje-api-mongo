@@ -7,6 +7,7 @@ const order = require('./controllers/order/order')
 const payment = require('./controllers/payment/payment')
 const product = require('./controllers/product/product')
 const base = require('./controllers/base/base');
+const prices = require('./controllers/prices/prices');
 
 router.get('/',(req,res)=>res.send('ok'));
 
@@ -39,6 +40,8 @@ router.post('/base/fili/id', base.findFiliById)
 router.post('/base/create', base.create)
 router.post('/base/createfili', base.createFili)
 router.post('/base/delete', base.delete)
+
+router.get('/prices', prices.find)
 
 
 // router.post('/user/create',User.create);

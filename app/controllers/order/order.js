@@ -1,6 +1,5 @@
 const { default: mongoose } = require('mongoose');
 const { db } = require('../../models/order');
-const order = require('../../models/order');
 const Order = require('../../models/order');
 const payment = require('../payment/payment');
 
@@ -22,7 +21,10 @@ module.exports = {
     },
 
     find : async(req, res) => {
-        const order = await Order.find().populate([{path: 'base', populate: {path: 'baseId', model: 'bases'}}]).exec();
+        const order = await Order.find({}, async(error, res) => {
+            await res.subPopulate('paymentMethod');
+            console.log(res)
+        }).populate([{path: 'base', populate: {path: 'baseId', model: 'bases'}}]).exec();
         return res.send(order)
     },
 

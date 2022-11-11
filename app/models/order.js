@@ -5,16 +5,19 @@ const orderSchema = new Schema({
     cliente: String,
     products: [
         {
-            amount: Number,
+            amount: {
+                type: Number, 
+                default: 0
+            },
             item: {
-                type: Schema.Types.ObjectId,
-                ref: 'bases.filiais'
+                type: mongo.Types.ObjectId,
+                ref: 'bases.products'
             }
         }
     ],
     paymentMethod:{
-        paymentId: Number,
-        name: String
+        type: mongo.Types.ObjectId,
+        ref: 'bases.payments'
     },
     base:{
         baseId: {
