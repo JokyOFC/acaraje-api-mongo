@@ -21,10 +21,7 @@ module.exports = {
     },
 
     find : async(req, res) => {
-        const order = await Order.find({}, async(error, res) => {
-            await res.subPopulate('paymentMethod');
-            console.log(res)
-        })
+        const order = await Order.find().populate('paymentMethod');
         return res.send(order)
     },
 

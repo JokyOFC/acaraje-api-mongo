@@ -13,7 +13,7 @@ module.exports = {
 
         console.log(base)
 
-        const baseCreate = await base.push({ payments: ...paymentId })
+        const baseCreate = await base.payments.push({ _id: paymentId })
         
         // const filial = await base.filiais.find((filial) => filial.filicod == FiliId)
         
@@ -23,19 +23,21 @@ module.exports = {
 
         base.save()
 
-        const paymentsPopulated = await Base.findById(BaseId)
+        const paymentsPopulated = await Base.findById(BaseId).populate('payments')
 
         return res.send(paymentsPopulated);
     },
     find : async(req, res) => {
-        const { BaseId, FiliId } = req.body
-        const base = await Base.findById(BaseId)
-        const filial = await base.filiais.find((filial) => filial.filicod == FiliId)
+        const { BaseId } = req.body
+        const base = await Base.findById(BaseId).populate('payments')
+        // const filial = await base.filiais.find((filial) => filial.filicod == FiliId)
 
         // const payment = await Payment.find()
-        const payment = filial.payments
+        // const payment = filial.payments
 
-        return res.send(payment)
+        const payments = base.payments
+
+        return res.send(payments)
     },
 
     // TO DO

@@ -7,14 +7,14 @@ const baseSchema = new Schema(
         payments: [
                 {
                     type: mongo.Types.ObjectId,
-                    ref: 'payments',
+                    ref: 'payment',
                     default: []
                 }
             ],
         products: [
                 {
                     type: mongo.Types.ObjectId,
-                    ref: 'products',
+                    ref: 'product',
                     default: []
                 }
             ],

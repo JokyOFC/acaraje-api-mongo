@@ -16,7 +16,7 @@ module.exports = {
     },
     find : async(req, res) => {
 
-        const prices = await Prices.find()
+        const prices = await Prices.find().populate('product')
         return res.send(prices)
 
     },

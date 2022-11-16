@@ -1,6 +1,8 @@
 const mongo = require('mongoose');
 const Schema = mongo.Schema;
 
+const subReferencesPopulate = require('mongoose-sub-references-populate');
+
 const orderSchema = new Schema({
     cliente: String,
     products: [
@@ -11,18 +13,20 @@ const orderSchema = new Schema({
             },
             item: {
                 type: mongo.Types.ObjectId,
-                ref: 'bases.products'
+                ref: 'product'
             }
         }
     ],
     paymentMethod:{
         type: mongo.Types.ObjectId,
-        ref: 'bases.payments'
+        ref: 'payment',
+        default: null,
     },
     base:{
         baseId: {
             type: Schema.Types.ObjectId, 
-            ref: 'bases'
+            ref: 'bases',
+            default: null,
         },
         fili: Number
     },

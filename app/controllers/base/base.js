@@ -3,7 +3,7 @@ const Base = require('../../models/base');
 module.exports = {
     create : async (req, res) => {
         const { name, filiais } = req.body
-        const base = await Base.create({name, filiais})
+        const base = await Base.create({ name, filiais })
         return res.send(base);
     },
     createFili : async(req, res) => {
@@ -14,7 +14,7 @@ module.exports = {
         return res.send(base)
     },
     find : async(req, res) => {
-        const base = await Base.find()
+        const base = await Base.find().populate('payments', 'products')
         return res.send(base)
     },
     findById : async(req,res) => {

@@ -14,28 +14,32 @@ module.exports = {
         const priceId = pricesTab.id
         const base = await Base.findById(BaseId)
             
-        let product = await base.products.push({name, price: priceId})
+        let product = await Product.create({name, price: priceId})
+        
+        let productId = product.id
+        let baseProd = base.products.push({ _id: productId })
+
         base.save()
 
-        let productId = base.products[ product - 1 ]
-        pricesTab.product = productId.id
+        pricesTab.product = productId
         pricesTab.save()
         
-        const productPopulated = await Base.findById(BaseId).populate([{path: 'products', populate: {path: 'price', model: 'prices'}}]).exec()
+        const productPopulated = await Base.findById(BaseId).populate('products', 'payments').exec()
 
         return res.send(productPopulated);
 
         // return res.send({})
     },  
     find : async(req, res) => {
-        const { BaseId, FiliId } = req.body
-        const base = await Base.findById(BaseId)
-        const filial = await base.filiais.find((filial) => filial.filicod == FiliId)
+        const { BaseId } = req.body
+        const base = await Base.findById(BaseId).populate('products')
+
+        await base.populate({ path: 'products', populate: { path: 'price', model: 'prices' } })
 
         // const payment = await Payment.find()
-        const product = filial.products
+        const products = base.products
 
-        return res.send(product)
+        return res.send(products)
     },
 
     // TO DO
