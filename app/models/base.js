@@ -6,16 +6,16 @@ const baseSchema = new Schema(
         name: String,
         payments: [
                 {
-                    name: String,
+                    type: mongo.Types.ObjectId,
+                    ref: 'payments',
+                    default: []
                 }
             ],
         products: [
                 {
-                    name: String,
-                    price: {
-                        type: mongo.Types.ObjectId,
-                        ref: 'prices'
-                    }
+                    type: mongo.Types.ObjectId,
+                    ref: 'products',
+                    default: []
                 }
             ],
         filiais: [

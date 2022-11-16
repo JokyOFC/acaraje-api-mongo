@@ -4,7 +4,7 @@ const Schema = mongo.Schema;
 const paymentSchema = new Schema({
     product: {
         type: mongo.Types.ObjectId,
-        ref: 'base.products',
+        ref: 'bases.products',
         default: null
     },
     price: Number,

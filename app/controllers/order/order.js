@@ -24,7 +24,7 @@ module.exports = {
         const order = await Order.find({}, async(error, res) => {
             await res.subPopulate('paymentMethod');
             console.log(res)
-        }).populate([{path: 'base', populate: {path: 'baseId', model: 'bases'}}]).exec();
+        })
         return res.send(order)
     },
 

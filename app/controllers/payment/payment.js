@@ -6,15 +6,24 @@ module.exports = {
         const { BaseId, name } = req.body
 
         const base = await Base.findById(BaseId)
+        
+        const payment = await Payment.create({ name })
+
+        const paymentId = payment.id
+
+        console.log(base)
+
+        const baseCreate = await base.push({ payments: ...paymentId })
+        
         // const filial = await base.filiais.find((filial) => filial.filicod == FiliId)
         
         // const payments = filial.payments
 
-        base.payments.push({ name: name })
+        // base.payments.push({ name: name })
 
         base.save()
 
-        const paymentsPopulated = await Base.findById(BaseId).populate([{path: 'products', populate: {path: 'price', model: 'prices'}}]).exec()
+        const paymentsPopulated = await Base.findById(BaseId)
 
         return res.send(paymentsPopulated);
     },
