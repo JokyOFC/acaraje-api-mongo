@@ -13,7 +13,7 @@ module.exports = {
 
         console.log(base)
 
-        const baseCreate = await base.payments.push({ _id: paymentId })
+        const baseCreate = await base.payments.push(paymentId)
         
         // const filial = await base.filiais.find((filial) => filial.filicod == FiliId)
         
