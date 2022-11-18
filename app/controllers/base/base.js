@@ -14,7 +14,7 @@ module.exports = {
         return res.send(base)
     },
     find : async(req, res) => {
-        const base = await Base.find().populate('payments', 'products')
+        const base = await Base.find().populate([ 'payments', 'products']).populate([{path: 'products', populate: { path: 'price', model:'prices' }}])
         return res.send(base)
     },
     findById : async(req,res) => {

@@ -21,37 +21,43 @@ module.exports = {
     },
 
     find : async(req, res) => {
-        const order = await Order.find().populate('paymentMethod');
+        const order = await Order.find().populate(['paymentMethod', {path: 'products', populate: {path: 'item', model: 'product'}}]).populate({path: 'products', populate: { path: 'item', populate: { path: 'price', model: 'prices' } }});
         return res.send(order)
     },
 
     // TO DO
 
     orderByDate : async(req, res) => {
-        const { date } = req.body
-        const order = await Order.find().sort({datefield: -1}, function(err, cursor){
+        const { id, filicod } = req.body
+        const order = await Order.find({$and: [{ "base.baseId": id }, { "base.fili": filicod } ]}).sort({datefield: -1}, function(err, cursor){
             console.log(err);
         })
         return res.send(order)
     },
 
     findByDate: async(req, res) => {
-        const { date } = req.body;
-        const order = await Order.find({"createdAt" : new ISODate(date) }).sort({datefield: -1});
+        const { id, filicod, date } = req.body;
+        const order = await Order.find({$and: [{ "base.baseId": id }, { "base.fili": filicod }, {"createdAt" : new ISODate(date) } ]}).sort({datefield: -1});
     
         return res.send(order)
     },
 
     findByBase: async(req, res) => {
-        const { id } = req.body;
+        const { id, filicod } = req.body;
         const objId = mongoose.Types.ObjectId(id)
-        const order = await Order.find({ base : objId }).populate(['paymentMethod','base', { path: 'products', populate: { path: 'item', model: 'product' } }]).exec()
+        const order = await Order.find({$and: [{ "base.baseId": id }, { "base.fili": filicod } ]})
         return res.send(order)
     },
 
     findByBaseNow: async(req, res) => {
-        const { id } = req.body;
-        const order = await Order.find({ 'base._id' : id }).populate(['paymentMethod','base', { path: 'products', populate: { path: 'item', model: 'product' } }]).exec()
+
+        var now = new Date();
+        var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+        const { id, filicod } = req.body;
+        const order = await Order.find({$and: [{ "base.baseId": id }, { "base.fili": filicod }, {"createdAt": {$gte: startOfToday}} ]}).populate(['paymentMethod','base', { path: 'products', populate: { path: 'item', model: 'product' } }]).exec()
+
+        return res.send(order)
     },
 
     findByBaseNow: async(req, res) => {

@@ -20,13 +20,13 @@ router.post('/order/create', order.post)
 router.post('/order/cancel', order.cancel)
 
 // products routes
-router.get('/products', product.find)
+router.post('/products', product.find)
 
 router.post('/product/create', product.create)
 router.post('/product/delete', product.delete)
 
 // payment routes
-router.get('/payments', payment.find)
+router.post('/payments', payment.find)
 
 router.post('/payment/create', payment.create)
 router.post('/payment/delete', payment.delete)
