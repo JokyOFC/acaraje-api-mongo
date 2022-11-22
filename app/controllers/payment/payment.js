@@ -43,9 +43,31 @@ module.exports = {
     // TO DO
 
     delete : async (req, res) => {
-        const { id } = req.body
-        const payment = await Payment.deleteOne({ id: id })
-        return res.send(payment)
+        const { BaseId, paymentId } = req.body
+        // const payment = await Payment.deleteOne({ id: id });
+
+        const base = await Base.findById(BaseId)
+
+        let payment = base.payments
+
+        console.log(paymentId)
+
+        const indexPay = payment.indexOf(paymentId)
+
+        let paymentDelete = payment.splice(indexPay, 1)
+
+        
+        payment = paymentDelete
+        
+        console.log(payment)
+
+        // payment = paymentDelete
+
+        // payment.push(payment)
+
+        base.save()
+        
+        return res.send(base)
     },
     update : async (req, res) => {
         

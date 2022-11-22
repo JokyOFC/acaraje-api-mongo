@@ -45,7 +45,7 @@ module.exports = {
     findByBase: async(req, res) => {
         const { id, filicod } = req.body;
         const objId = mongoose.Types.ObjectId(id)
-        const order = await Order.find({$and: [{ "base.baseId": id }, { "base.fili": filicod } ]})
+        const order = await Order.find({$and: [{ "base.baseId": id }, { "base.fili": filicod } ]}).populate(['paymentMethod', { path: 'products', populate: { path: 'item', model: 'product' } }, { path: 'products', populate: { path: 'item', populate: { path: 'price', model: 'prices' } } }]).exec()
         return res.send(order)
     },
 

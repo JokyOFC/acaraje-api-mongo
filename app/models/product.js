@@ -7,6 +7,7 @@ const productSchema = new Schema({
         type: mongo.Types.ObjectId,
         ref: 'prices'
     },
+    ammount: {type: Number, default: 0},
     createdAt: {
         type: Date,
         default: Date.now,
