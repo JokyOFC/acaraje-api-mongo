@@ -71,5 +71,16 @@ module.exports = {
     },
     update : async (req, res) => {
         
+        /*
+            {
+                "paymentId" : "paymentId",
+                "name" : "name",
+            }
+        */
+
+            const { paymentId, name, price } = req.body;
+
+            const payment = await Payment.findById(paymentId)
+
     }
 }
