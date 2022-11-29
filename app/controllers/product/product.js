@@ -71,6 +71,25 @@ module.exports = {
         return res.send(base)
     },
     update : async (req, res) => {
-        
+        /*
+            {
+                "productId" : "paymentId",
+                "name" : "name",
+                "price" : {
+                    "priceId": "priceId",
+                    "price" : "price",
+                    "priceEvent" : "priceEvent"
+                }
+            }
+        */
+
+            const { productId, name, price } = req.body;
+
+            const product = await Product.findById(productId).populate('price')
+
+            const priceTab = await prices.findById(price.priceId)
+
+            product.name = name;
+            product.save()
     }
 }
