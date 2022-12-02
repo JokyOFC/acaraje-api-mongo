@@ -65,6 +65,18 @@ module.exports = {
         const order= await Order.find({})
     },
 
+    finishUpdate : async(req,res) => {
+        const { id, finished } = req.body;
+        const order = await Order.findById(id)
+
+        order.finished = finished;
+
+        order.save();
+
+        return res.send(order);
+
+    },
+
     cancel : async(req, res) => {
         const { id } = req.body;
         const order = await Order.deleteOne({ _id: id })

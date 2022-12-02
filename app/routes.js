@@ -18,6 +18,7 @@ router.post('/orders/base', order.findByBase)
 
 router.post('/order/create', order.post)
 router.post('/order/cancel', order.cancel)
+router.post('/order/finishupdate', order.finishUpdate)
 
 // products routes
 router.post('/products', product.find)
