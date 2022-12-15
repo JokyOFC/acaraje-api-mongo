@@ -38,9 +38,14 @@ router.get('/bases', base.find)
 router.post('/base/id', base.findById)
 router.post('/base/fili/id', base.findFiliById)
 
+router.post('/base/fili/delete', base.deleteFili)
+
 router.post('/base/create', base.create)
 router.post('/base/createfili', base.createFili)
 router.post('/base/delete', base.delete)
+
+router.post('/base/update', base.updateFilis)
+router.post('/base/updatefiliname', base.updateFiliName)
 
 router.get('/prices', prices.find)
 
