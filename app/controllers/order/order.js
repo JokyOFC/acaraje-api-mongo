@@ -44,7 +44,6 @@ module.exports = {
 
     findByBase: async(req, res) => {
         const { id, filicod } = req.body;
-        const objId = mongoose.Types.ObjectId(id)
         const order = await Order.find({$and: [{ "base.baseId": id }, { "base.fili": filicod } ]}).populate(['paymentMethod', { path: 'products', populate: { path: 'item', model: 'product' } }, { path: 'products', populate: { path: 'item', populate: { path: 'price', model: 'prices' } } }]).exec()
         return res.send(order)
     },
@@ -55,14 +54,9 @@ module.exports = {
         var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
         const { id, filicod } = req.body;
-        const order = await Order.find({$and: [{ "base.baseId": id }, { "base.fili": filicod }, {"createdAt": {$gte: startOfToday}} ]}).populate(['paymentMethod','base', { path: 'products', populate: { path: 'item', model: 'product' } }]).exec()
+        const order = await Order.find({$and: [{ "base.baseId": id }, { "base.fili": filicod }, {"createdAt": {$gte: startOfToday}} ]}).populate(['paymentMethod', { path: 'products', populate: { path: 'item', model: 'product' } }, { path: 'products', populate: { path: 'item', populate: { path: 'price', model: 'prices' } } }]).exec()
 
         return res.send(order)
-    },
-
-    findByBaseNow: async(req, res) => {
-        const { id } = req.body;
-        const order= await Order.find({})
     },
 
     finishUpdate : async(req,res) => {

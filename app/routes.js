@@ -15,6 +15,7 @@ router.get('/',(req,res)=>res.send('ok'));
 router.get('/orders', order.find)
 
 router.post('/orders/base', order.findByBase)
+router.post('/orders/base/now', order.findByBaseNow)
 
 router.post('/order/create', order.post)
 router.post('/order/cancel', order.cancel)
