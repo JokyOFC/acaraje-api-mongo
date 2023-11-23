@@ -10,7 +10,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 var connection = mongo.connect(
-    "mongodb+srv://JokyOFC:2eWxXZuuhVYaFYHQ@api-acaraje-app.0vwjhi5.mongodb.net/?retryWrites=true&w=majority",
+    "mongodb+srv://JokyOFC:2eWxXZuuhVYaFYHQ@api-acaraje-app.0vwjhi5.mongodb.net/acaraje-db?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
